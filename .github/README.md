@@ -1,4 +1,4 @@
-## Table of Contents
+# Table of Contents
 - [Intro](#intro)
 - [Architecture](#architecture)
 - [API Documentation](#api-documentation)
@@ -9,28 +9,30 @@
 		- [2. Register](#register)
 		- [3. Logout](#logout)
 - [Contributors](#contributors)
-## Intro
+# Intro
 This is a repository for storing [Moove](https://github.com/C241-PR543-team)'s back-end RESTful API source code and its documentation.
-## Architecture
+# Architecture
 Coming soon...
-## API Documentation
+# API Documentation
 The following is Moove API documentation. This API provides [...] . Below you'll find all the necessary information to integrate and use our API effectively.
-### Authentication
+## Authentication
 To access the Moove API, you need to obtain an API key. Please ask the CC members for the API key.
 
 Include your API key in the header of each API request, unless mentioned:
 ```
 Authorization: YOUR_API_KEY
 ```
-### Base URL
+## Base URL
 
 ```
 TBD
 ```
-### Endpoints
-#### 1. Login
+## Endpoints
+### 1. Login
 Endpoint: `/login`
+
 HTTP Method: `POST`
+
 Example Request:
 ```json
 {
@@ -39,6 +41,7 @@ Example Request:
 }
 ```
 Example Responses:
+
 Status Code: 200
 ```json
 {
@@ -60,9 +63,11 @@ Status code: 500
 	"message": "internal server error",
 }
 ```
-#### 2. Register
+### 2. Register
 Endpoint: `/register`
+
 HTTP Method: `POST`
+
 Example Request:
 ```json
 {
@@ -74,6 +79,7 @@ Example Request:
 }
 ```
 Example Responses:
+
 Status Code: 200
 ```json
 {
@@ -95,9 +101,11 @@ Status code: 500
 	"message": "internal server error",
 }
 ```
-#### 3. Logout
+### 3. Logout
 Endpoint: `/register`
+
 HTTP Method: `POST`
+
 Example Request:
 ```json
 {
@@ -106,6 +114,7 @@ Example Request:
 }
 ```
 Example Responses:
+
 Status Code: 200
 ```json
 {
@@ -127,7 +136,7 @@ Status code: 500
 	"message": "internal server error",
 }
 ```
-## Contributors
+# Contributors
 Developed by cloud computing members of C241-PR543 Bangkit capstone team.
 
 | Contributor            | Links                                                                                              |
