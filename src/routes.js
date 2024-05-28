@@ -6,8 +6,16 @@ router.get('/', (req, res) => {
     res.send('Hello, Express!');
 });
 
-router.get('/about', (req, res) => {
-    res.send('About Us');
+router.post('/login', (req, res) => {
+    
+});
+
+router.post('/register', (req, res) => {
+
+});
+
+router.post('/logout', (req, res) => {
+
 });
 
 // Export the router
