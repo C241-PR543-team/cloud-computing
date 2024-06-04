@@ -4,10 +4,10 @@ import authControllers from '../controllers/authControllers.js';
 import auth from '../middlewares/auth.js';
 
 const router = express.Router();
-const route = "/moove";
 
-router.post(`${route}/register`, authControllers.register);
-router.post(`${route}/login`, authControllers.login);
-router.post(`${route}/logout`, authControllers.logout);
+
+router.post(`/register`, authControllers.register);
+router.post(`/login`, authControllers.login);
+router.post(`/logout`, authControllers.logout);
 
 export default router;
