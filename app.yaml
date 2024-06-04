@@ -1,0 +1,5 @@
+runtime: nodejs18
+service: default
+
+beta_settings:
+  cloud_sql_instances: moove-c241-pr543:asia-southeast2:moove-c241-pr543
