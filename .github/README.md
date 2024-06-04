@@ -11,12 +11,12 @@ This is a repository for storing [Moove](https://github.com/C241-PR543-team)'s b
 # Architecture
 This platform uses three Google Cloud Platform services, i.e. App Engine, Cloud SQL, and Cloud Storage. Additionally, TensorFlow JS is used for platform's model.
 The following is the cloud architecture diagram of this platform.
-[[!Moove Architecture](https://raw.githubusercontent.com/C241-PR543-team/cloud-computing/master/.github/images/architecture.png)]
+[![Moove Architecture](https://raw.githubusercontent.com/C241-PR543-team/cloud-computing/master/.github/images/architecture.png)]
 
 # Database
 Currently, this platform has five tables, i.e. `plans`, `places`, `plan_places`, `themes`, and '`users`.
 The following is the class diagram of current database scheme.
-[[!Moove Database](https://raw.githubusercontent.com/C241-PR543-team/cloud-computing/master/.github/images/class_diagram.png)]
+[![Moove Database](https://raw.githubusercontent.com/C241-PR543-team/cloud-computing/master/.github/images/class_diagram.png)]
 
 # API Documentation
 You can access the API documentation details on the [wiki](https://github.com/C241-PR543-team/cloud-computing/wiki) page.
