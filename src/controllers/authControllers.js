@@ -61,7 +61,7 @@ async function register(req, res) {
         if (existingEmail) {
             return res.status(400).json({ status: 'fail', message: 'Email already exists.' });
         } else if (existingPhone) {
-            return res.status(400).json({ status: 'fail', message: 'Phone already exists.' });
+            return res.status(400).json({ status: 'fail', message: 'Phone number already exists.' });
         }
 
         // Create the user
@@ -94,9 +94,12 @@ async function register(req, res) {
 
 async function logout(req, res) {
     const { user_id } = req.body;
-
+    console.log("token: " + req.body.token);    
     try {
         const user = await users.findOne({ where: { user_id } });
+        if (!user) {
+            return res.status(400).json({ status: 'fail', message: 'User ID not found.' });
+        }
 
         // Return success response
         res.status(200).json({
