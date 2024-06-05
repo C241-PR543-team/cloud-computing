@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import Users from '../models/Users.js';
+import users from '../models/Users.js';
 import jwt from 'jsonwebtoken';
 
 async function login(req, res) {
@@ -15,7 +15,7 @@ async function login(req, res) {
 
     try {
         // Find the user by email
-        const user = await Users.findOne({ where: { email } });
+        const user = await users.findOne({ where: { email } });
         if (!user) {
             return res.status(400).json({ 
                 status: 'fail',
@@ -33,14 +33,14 @@ async function login(req, res) {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
         res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000});
 
         // Respond with a success message and token
         res.status(200).json({
             status: 'success',
             message: 'Login successful.',
-            token
+            body: { id: user.id, name: user.name, email: user.email, token }
         });
     } catch (error) {
         res.status(500).json({
@@ -55,14 +55,17 @@ async function register(req, res) {
     const { name, phone, birthday, email, password } = req.body;
 
     try {
-        // Check if the user with the provided email already exists
-        const existingUser = await Users.findOne({ where: { email } });
-        if (existingUser) {
+        // Check if user & phone is available
+        const existingEmail = await users.findOne({ where: { email } });
+        const existingPhone = await users.findOne({ where: { phone } });
+        if (existingEmail) {
             return res.status(400).json({ status: 'fail', message: 'Email already exists.' });
+        } else if (existingPhone) {
+            return res.status(400).json({ status: 'fail', message: 'Phone number already exists.' });
         }
 
         // Create the user
-        await Users.create({
+        const newUser = await users.create({
             name,
             phone,
             birthday,
@@ -70,10 +73,14 @@ async function register(req, res) {
             password: bcrypt.hashSync(password, 10)
         });
 
+        // Generate JWT
+        const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
+
         // Return success response
         res.status(200).json({
             status: 'success',
-            message: 'Register successful.'
+            message: 'Register successful.',
+            body: { id: newUser.id, email: newUser.email, token }
         });
     } catch (error) {
         // Handle any errors
@@ -86,22 +93,19 @@ async function register(req, res) {
 }
 
 async function logout(req, res) {
-    const { user_id, session_token } = req.body;
-
+    const { user_id } = req.body;
+    console.log("token: " + req.body.token);    
     try {
-        // Check if the session token matches the one stored for the user_id (assuming session management)
-        if (session_token !== "r4nd0mstr1ng") {
-            return res.status(400).json({ status: 'fail', message: 'Logout failed.' });
+        const user = await users.findOne({ where: { user_id } });
+        if (!user) {
+            return res.status(400).json({ status: 'fail', message: 'User ID not found.' });
         }
-
-        // Perform logout actions, such as clearing session data or cookies
-        // For example, if using cookies:
-        res.clearCookie('token');
 
         // Return success response
         res.status(200).json({
             status: 'success',
-            message: 'Logout successful.'
+            message: 'Logout successful.',
+            body: { id: user.id, token: "" }
         });
     } catch (error) {
         // Handle any errors
