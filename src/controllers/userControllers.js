@@ -17,7 +17,7 @@ async function userDetails(req,res) {
 
     res.status(200).json({
       status: 'success',
-      message: 'Login successful.',
+      message: 'Getting user successful.',
       data: {
         email: user.email,
         phone: user.phone,
