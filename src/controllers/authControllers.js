@@ -34,7 +34,7 @@ async function login(req, res) {
 
         // Generate a JWT token
         const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
-        res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000});
+        // res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000});
 
         // Respond with a success message and token
         res.status(200).json({
@@ -94,7 +94,7 @@ async function register(req, res) {
 
 async function logout(req, res) {
     const { user_id } = req.body;
-    console.log("token: " + req.body.token);    
+
     try {
         const user = await users.findOne({ where: { user_id } });
         if (!user) {
