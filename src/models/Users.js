@@ -19,7 +19,8 @@ const Users = db.define('users', {
     },
     phone: {
         type: DataTypes.STRING(14),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     name: {
         type: DataTypes.STRING(50),
