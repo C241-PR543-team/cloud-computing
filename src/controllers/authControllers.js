@@ -33,19 +33,18 @@ async function login(req, res) {
         }
 
         // Generate a JWT token
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
-        // res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000});
+        const token = jwt.sign({ user_id: user.user_id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
         // Respond with a success message and token
         res.status(200).json({
             status: 'success',
             message: 'Login successful.',
-            body: { id: user.id, name: user.name, email: user.email, token }
+            body: { user_id: user.user_id, name: user.name, email: user.email, token }
         });
     } catch (error) {
         res.status(500).json({
             status: 'error',
-            message: 'Internal server error',
+            message: 'Internal server error.',
             error: error.message 
         });
     }
@@ -74,20 +73,20 @@ async function register(req, res) {
         });
 
         // Generate JWT
-        const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        const token = jwt.sign({ user_id: newUser.user_id, email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
         // Return success response
         res.status(200).json({
             status: 'success',
             message: 'Register successful.',
-            body: { id: newUser.id, email: newUser.email, token }
+            body: { user_id: newUser.user_id, email: newUser.email, token }
         });
     } catch (error) {
         // Handle any errors
         console.error('Error registering user:', error);
         res.status(500).json({
             status: 'error',
-            message: 'Internal server error'
+            message: 'Internal server error.'
         });
     }
 }
@@ -105,14 +104,14 @@ async function logout(req, res) {
         res.status(200).json({
             status: 'success',
             message: 'Logout successful.',
-            body: { id: user.id, token: "" }
+            body: { user_id: user.user_id, token: "" }
         });
     } catch (error) {
         // Handle any errors
         console.error('Error logging out user:', error);
         res.status(500).json({
             status: 'error',
-            message: 'Internal server error'
+            message: 'Internal server error.'
         });
     }
 }
