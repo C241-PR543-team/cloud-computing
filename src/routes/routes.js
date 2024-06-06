@@ -15,7 +15,8 @@ router.post(`/login`, authControllers.login);
 router.post(`/logout`, auth, authControllers.logout);
 
 // User Routes
-router.put('/users/:user_id/password', auth, userControllers.resetPassword);
 router.get('/users/:user_id', auth, userControllers.userDetails);
+router.put('/users/:user_id', auth, userControllers.updateUserDetails);
+router.put('/users/:user_id/password', auth, userControllers.resetPassword);
 
 export default router;
