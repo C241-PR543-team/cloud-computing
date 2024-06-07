@@ -53,6 +53,14 @@ async function login(req, res) {
 async function register(req, res) {
     const { name, phone, birthday, email, password } = req.body;
 
+    const phoneRegex = /^62\d{9,14}$/; // Indonesian country code and 9-14 digits
+    if (!phoneRegex.test(phone)) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Phone number must start with country code (62) and contain 9-14 digits.'
+        });
+    }
+
     try {
         // Check if user & phone is available
         const existingEmail = await users.findOne({ where: { email } });
