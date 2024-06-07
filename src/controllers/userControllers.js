@@ -38,6 +38,14 @@ async function updateUserDetails(req, res) {
   const user_id = req.params.user_id;
   const { email, phone, name, birthday } = req.body;
 
+  const phoneRegex = /^62\d{9,14}$/; // Indonesian country code and 9-14 digits
+  if (!phoneRegex.test(phone)) {
+      return res.status(400).json({
+          status: 'fail',
+          message: 'Phone number must start with country code (62) and contain 9-14 digits.'
+      });
+  }
+
   try {
     const existingUser = await users.findOne({
       where: {
