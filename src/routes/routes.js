@@ -6,6 +6,7 @@ import auth from '../middlewares/auth.js';
 // Controllers
 import authControllers from '../controllers/authControllers.js';
 import userControllers from '../controllers/userControllers.js';
+import locationControllers from '../controllers/locationControllers.js'
 
 const router = express.Router();
 
@@ -18,5 +19,11 @@ router.post(`/logout`, auth, authControllers.logout);
 router.get('/users/:user_id', auth, userControllers.userDetails);
 router.put('/users/:user_id', auth, userControllers.updateUserDetails);
 router.put('/users/:user_id/password', auth, userControllers.resetPassword);
+
+// Places Routes
+
+
+// Location Routes
+router.get('/locations/:location_id', auth, locationControllers.locationDetails);
 
 export default router;
