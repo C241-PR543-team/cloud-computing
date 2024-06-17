@@ -8,8 +8,9 @@ const Places = db.define('places', {
         primaryKey: true,
         autoIncrement: true
     },
-    place: {
-
+    place_name: {
+        type: DataTypes.STRING(55),
+        allowNull: false,
     },
     description: {
 
@@ -17,7 +18,8 @@ const Places = db.define('places', {
     city: {
 
     },
-    price: {
-      
-    }
+    
+    tableName: 'places',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'   
 });
