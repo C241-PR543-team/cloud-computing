@@ -32,7 +32,8 @@ const Users = db.define('users', {
     }
 }, {
     tableName: 'users', // Specify the table name
-    timestamps: false // Assuming there are no createdAt and updatedAt fields
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
 });
 
 db.sync();
