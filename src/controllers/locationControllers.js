@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize';
 
 async function locationDetails(req, res) {
   const location_id = req.params.location_id;
+  // console.log(location_id)
 
   try {
     const location = await locations.findOne({ where: { location_id }});
@@ -16,7 +17,7 @@ async function locationDetails(req, res) {
 
     res.status(200).json({
       status: 'success',
-      message: 'Getting location successful',
+      message: 'Getting location successful.',
       data: {
         name: location.name,
         description: location.description,
@@ -24,6 +25,7 @@ async function locationDetails(req, res) {
       }
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       status: 'error',
       message: 'Internal server error.',

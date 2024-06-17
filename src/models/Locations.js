@@ -19,11 +19,14 @@ const Locations = db.define('locations', {
     photo: {
       type: DataTypes.STRING(255),
       allowNull: false,
-    },
+    }, 
+  },
+  {
     tableName: 'locations',
     createdAt: 'created_at',
     updatedAt: 'updated_at'    
-});
+  }
+);
 
 db.sync();
 

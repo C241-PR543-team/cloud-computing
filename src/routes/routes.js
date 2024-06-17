@@ -7,7 +7,6 @@ import auth from '../middlewares/auth.js';
 import authControllers from '../controllers/authControllers.js';
 import userControllers from '../controllers/userControllers.js';
 import locationControllers from '../controllers/locationControllers.js'
-import predictionControllers from '../controllers/predictionControllers.js';
 
 const router = express.Router();
 
@@ -26,8 +25,5 @@ router.put('/users/:user_id/password', auth, userControllers.resetPassword);
 
 // Location Routes
 router.get('/locations/:location_id', auth, locationControllers.locationDetails);
-
-// Prediction (test)
-// router.post('/predict', predictionControllers.predict);
 
 export default router;
