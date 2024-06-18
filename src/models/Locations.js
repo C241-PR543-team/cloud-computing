@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import db from '../database/config.js';
 
 const Locations = db.define('locations', {
@@ -27,7 +27,5 @@ const Locations = db.define('locations', {
     updatedAt: 'updated_at'    
   }
 );
-
-db.sync();
 
 export default Locations;

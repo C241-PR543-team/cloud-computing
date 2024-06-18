@@ -36,6 +36,6 @@ const Users = db.define('users', {
     updatedAt: 'updated_at'
 });
 
-db.sync();
+// db.sync();
 
 export default Users;
