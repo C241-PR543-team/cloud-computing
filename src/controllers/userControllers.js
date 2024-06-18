@@ -1,13 +1,12 @@
 import bcrypt from 'bcrypt';
-import users from '../models/Users.js';
-import jwt from 'jsonwebtoken';
+import Users from '../models/Users.js';
 import { Sequelize } from 'sequelize';
 
-async function userDetails(req, res) {
+async function getUserById(req, res) {
   const user_id = req.params.user_id;
 
   try {
-    const user = await users.findOne({ where: { user_id } });
+    const user = await Users.findOne({ where: { user_id } });
 
     if (!user) {
       return res.status(400).json({
@@ -34,7 +33,7 @@ async function userDetails(req, res) {
   }
 }
 
-async function updateUserDetails(req, res) {
+async function editUserById(req, res) {
   const user_id = req.params.user_id;
   const { email, phone, name, birthday } = req.body;
 
@@ -47,7 +46,7 @@ async function updateUserDetails(req, res) {
   }
 
   try {
-    const existingUser = await users.findOne({
+    const existingUser = await Users.findOne({
       where: {
         [Sequelize.Op.or]: [{ email }, { phone }],
         user_id: { [Sequelize.Op.ne]: user_id }
@@ -61,7 +60,7 @@ async function updateUserDetails(req, res) {
       });
     }
 
-    const user = await users.findOne({ where: { user_id } });
+    const user = await Users.findOne({ where: { user_id } });
     if (!user) {
       return res.status(400).json({
         status: 'fail',
@@ -105,7 +104,7 @@ async function resetPassword(req, res) {
   }
 
   try {
-    const user = await users.findOne({ where: { user_id } });
+    const user = await Users.findOne({ where: { user_id } });
 
     if (!user || !bcrypt.compareSync(passwordOld, user.password)) {
       return res.status(400).json({ 
@@ -136,4 +135,4 @@ async function resetPassword(req, res) {
   }
 }
 
-export default { userDetails, updateUserDetails, resetPassword };
+export default { getUserById, editUserById, resetPassword };
