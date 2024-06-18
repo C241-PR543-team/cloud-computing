@@ -23,6 +23,7 @@ router.put('/users/:user_id/password', auth, userControllers.resetPassword);
 
 // Places/Destination Routes
 router.get('/places/:place_id', auth, placeControllers.getPlaceById);
+router.get('/locations/:location_id/places', auth, placeControllers.getPlacesByLocationId);
 
 // Location/City Routes
 router.get('/locations', auth, locationControllers.getAllLocations);
