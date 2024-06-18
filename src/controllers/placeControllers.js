@@ -14,7 +14,7 @@ async function getPlacesByLocationId(req, res) {
     if (places.length == 0) {
       return res.status(400).json({
         status: 'fail',
-        message: 'Error getting places in this location.'
+        message: 'Error getting places within location.'
       });
     }
 
@@ -23,15 +23,21 @@ async function getPlacesByLocationId(req, res) {
       const urlMapsTemplate = 'https://www.google.com/maps/@{latitude},{longitude},15z';
       const urlMaps = urlMapsTemplate.replace('{latitude}', coordinates.lat).replace('{longitude}', coordinates.lng);
 
-      return {
-          place_id: place.place_id,
-          description: place.description,
-          category: place.category,
-          maps: urlMaps
+      return {          
+        place_id: place.place_id,
+        description: place.description,
+        category: place.category,
+        maps: urlMaps
       };
     });
 
-    return res.status(200).json({ places: placesWithUrls });
+    return res.status(200).json({ 
+      status: "success",
+      message: "Getting places within location successful.",
+      data: {
+        places: placesWithUrls 
+      }
+    });
   } catch (error) {
     // console.log(error);
     res.status(500).json({
