@@ -17,14 +17,15 @@ router.post(`/login`, authControllers.login);
 router.post(`/logout`, auth, authControllers.logout);
 
 // User Routes
-router.get('/users/:user_id', auth, userControllers.userDetails);
-router.put('/users/:user_id', auth, userControllers.updateUserDetails);
+router.get('/users/:user_id', auth, userControllers.getUserById);
+router.put('/users/:user_id', auth, userControllers.editUserById);
 router.put('/users/:user_id/password', auth, userControllers.resetPassword);
 
-// Places Routes
-router.get('/places/:place_id', auth, placeControllers.placeDetails);
+// Places/Destination Routes
+router.get('/places/:place_id', auth, placeControllers.getPlaceById);
 
-// Location Routes
-router.get('/locations/:location_id', auth, locationControllers.locationDetails);
+// Location/City Routes
+router.get('/locations', auth, locationControllers.getAllLocations);
+router.get('/locations/:location_id', auth, locationControllers.getLocationById);
 
 export default router;

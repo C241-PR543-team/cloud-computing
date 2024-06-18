@@ -1,10 +1,10 @@
-import places from '../models/Places.js';
+import Places from '../models/Places.js';
 
-async function placeDetails(req, res) {
+async function getPlaceById(req, res) {
   const place_id = req.params.place_id;
 
   try {
-    const place = await places.findByPk(req.params.place_id, {
+    const place = await Places.findByPk(req.params.place_id, {
       include: 'location'
   });
 
@@ -39,4 +39,4 @@ async function placeDetails(req, res) {
   }
 }
 
-export default { placeDetails };
+export default { getPlaceById };

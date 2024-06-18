@@ -1,10 +1,35 @@
-import locations from '../models/Locations.js';
+import Locations from '../models/Locations.js';
+import { Sequelize } from 'sequelize';
 
-async function locationDetails(req, res) {
+async function getAllLocations(req, res) {
+  try{
+    const locations = await Locations.findAll({
+      attributes: ['location_id', 'name', 'description', 'photo'],
+      where: {
+        location_id: {
+            [Sequelize.Op.not]: 0
+        }
+    }
+    });
+
+    res.status(200).json({
+        status: 'success',
+        data: locations
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal server error.',
+    });
+  }
+}
+
+async function getLocationById(req, res) {
   const location_id = req.params.location_id;
 
   try {
-    const location = await locations.findOne({ where: { location_id }});
+    const location = await Locations.findOne({ where: { location_id }});
     
     if (!location) {
       return res.status(400).json({
@@ -30,4 +55,4 @@ async function locationDetails(req, res) {
   }
 }
 
-export default { locationDetails }
+export default { getLocationById, getAllLocations }
