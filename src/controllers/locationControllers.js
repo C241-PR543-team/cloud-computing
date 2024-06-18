@@ -14,6 +14,7 @@ async function getAllLocations(req, res) {
 
     res.status(200).json({
         status: 'success',
+        message: 'Getting locations succesful.',
         data: locations
     });
   } catch (error) {
