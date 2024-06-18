@@ -35,7 +35,7 @@ async function getLocationById(req, res) {
       return res.status(400).json({
         status: 'fail',
         message: 'Error getting location.'
-      })
+      });
     }
 
     res.status(200).json({

@@ -11,6 +11,13 @@ async function getPlacesByLocationId(req, res) {
       }
     });
 
+    if (places.length == 0) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Error getting location.'
+      });
+    }
+
     const placesWithUrls = places.map(place => {
       const coordinates = JSON.parse(place.coordinate.replace(/'/g, '"'));
       const urlMapsTemplate = 'https://www.google.com/maps/@{latitude},{longitude},15z';
