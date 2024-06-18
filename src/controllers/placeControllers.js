@@ -14,7 +14,7 @@ async function getPlacesByLocationId(req, res) {
     if (places.length == 0) {
       return res.status(400).json({
         status: 'fail',
-        message: 'Error getting location.'
+        message: 'Error getting places in this location.'
       });
     }
 
