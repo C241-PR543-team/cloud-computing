@@ -9,7 +9,7 @@ async function login(req, res) {
     if (!email || !password) {
         return res.status(400).json({ 
             status: 'fail',
-            message: '' 
+            message: 'Email and password are required.' 
         });
     }
 
